@@ -24,7 +24,7 @@ public class DistanceServiceImpl implements DistanceService {
     public void calculateDistance(Customer customer, List<Warehouse> warehouses) {
         var distances = new ArrayList<CustomerWarehouseDistance>();
 
-        warehouses.forEach(warehouse -> {
+        warehouses.parallelStream().forEach(warehouse -> {
             var calculatedDistance = SloppyMath.haversinMeters(
               customer.getLatitude(), customer.getLongitude(),
               warehouse.getLatitude(), warehouse.getLongitude());
